@@ -1,9 +1,4 @@
-# Production-Grade CQRS Implementation in Go
-
-[![Go Version](https://img.shields.io/badge/go-1.24+-blue.svg)](https://golang.org/doc/devel/release)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)]()
+# CQRS Implementation in Go
 
 A **production-ready** Command Query Responsibility Segregation (CQRS) implementation in Go, designed by senior engineers with 20+ years of experience. Features **O(1) operations**, advanced concurrency patterns, and enterprise-grade middleware.
 
