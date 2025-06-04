@@ -164,7 +164,7 @@ func main() {
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/arash-mosavi/go-cqrs
 cd cqrs
 
 # Initialize Go module (if not already done)
