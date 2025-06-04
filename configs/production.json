@@ -1,0 +1,93 @@
+{
+  "command_bus": {
+    "initial_capacity": 512,
+    "enable_metrics": true,
+    "max_handlers": 2000,
+    "timeout_seconds": 30,
+    "enable_validation": true,
+    "enable_logging": true
+  },
+  "query_bus": {
+    "initial_capacity": 512,
+    "enable_metrics": true,
+    "max_handlers": 2000,
+    "timeout_seconds": 15,
+    "enable_caching": true,
+    "cache_ttl_seconds": 600,
+    "enable_retry": true,
+    "retry_max_attempts": 3,
+    "retry_delay_ms": 100
+  },
+  "middleware": {
+    "timeout": {
+      "enabled": true,
+      "default_seconds": 30,
+      "command_seconds": 30,
+      "query_seconds": 15
+    },
+    "circuit_breaker": {
+      "enabled": true,
+      "failure_threshold": 10,
+      "recovery_time_ms": 10000,
+      "half_open_max_calls": 5
+    },
+    "rate_limit": {
+      "enabled": true,
+      "requests_per_sec": 5000,
+      "burst_size": 500,
+      "window_ms": 1000
+    },
+    "caching": {
+      "enabled": true,
+      "default_ttl_sec": 600,
+      "max_size": 50000,
+      "eviction_policy": "LRU"
+    },
+    "retry": {
+      "enabled": true,
+      "max_attempts": 3,
+      "base_delay_ms": 100,
+      "max_delay_ms": 10000,
+      "backoff_strategy": "exponential"
+    },
+    "validation": {
+      "enabled": true,
+      "strict_mode": true,
+      "fail_fast": true
+    },
+    "logging": {
+      "enabled": true,
+      "level": "info",
+      "format": "json",
+      "include_args": false,
+      "include_timing": true
+    }
+  },
+  "monitoring": {
+    "enabled": true,
+    "metrics_port": 9090,
+    "prometheus_path": "/metrics",
+    "health_check_path": "/health",
+    "tracing": {
+      "enabled": true,
+      "sample_rate": 0.05,
+      "endpoint": "http://jaeger:14268/api/traces",
+      "service_name": "cqrs-production"
+    },
+    "profiling": {
+      "enabled": false,
+      "port": 6060,
+      "cpu_prof": false,
+      "mem_prof": false,
+      "block_prof": false
+    }
+  },
+  "performance": {
+    "gc_percent": 75,
+    "max_procs": 0,
+    "memory_ballast_mb": 512,
+    "enable_pooling": true,
+    "pool_size": 200,
+    "enable_preallocation": true
+  }
+}

@@ -1,22 +1,22 @@
-# 🚀 Production-Grade CQRS Implementation in Go
+# Production-Grade CQRS Implementation in Go
 
 [![Go Version](https://img.shields.io/badge/go-1.24+-blue.svg)](https://golang.org/doc/devel/release)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)]()
-d
+
 A **production-ready** Command Query Responsibility Segregation (CQRS) implementation in Go, designed by senior engineers with 20+ years of experience. Features **O(1) operations**, advanced concurrency patterns, and enterprise-grade middleware.
 
-## 🎯 Key Features
+## Key Features
 
-### ⚡ Performance & Scalability
+### Performance & Scalability
 - **O(1) Handler Lookup**: Hash map-based command/query resolution
 - **Concurrent Access**: Read-write mutexes for optimal concurrent performance
 - **Memory Optimized**: Pre-allocated maps with configurable initial capacity
 - **Zero-Allocation Paths**: Optimized execution paths for high-throughput scenarios
 - **Built-in Benchmarking**: Comprehensive performance measurement suite
 
-### 🛡️ Production Ready
+### Production Ready
 - **Error-First Design**: Robust error handling without panics
 - **Context Support**: Full context.Context integration for cancellation and timeouts
 - **Middleware System**: Composable middleware for cross-cutting concerns
@@ -24,28 +24,28 @@ A **production-ready** Command Query Responsibility Segregation (CQRS) implement
 - **Rate Limiting**: Built-in rate limiting for resource protection
 - **Comprehensive Metrics**: Real-time performance monitoring
 
-### 🔧 Developer Experience
+### Developer Experience
 - **Type Safety**: Generic functions for compile-time type safety
 - **Clean Architecture**: SOLID principles and clean code practices
 - **Comprehensive Testing**: Unit tests, integration tests, and benchmarks
 - **Multiple Examples**: From basic usage to production scenarios
 - **Detailed Documentation**: Comprehensive guides and API documentation
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Quick Start](#-quick-start)
-- [Architecture Overview](#-architecture-overview)
-- [Installation](#-installation)
-- [Usage Examples](#-usage-examples)
-- [Performance Benchmarks](#-performance-benchmarks)
-- [Middleware System](#-middleware-system)
-- [Production Considerations](#-production-considerations)
-- [API Reference](#-api-reference)
-- [Examples](#-examples)
-- [Testing](#-testing)
-- [Contributing](#-contributing)
+- [Quick Start](#quick-start)
+- [Architecture Overview](#architecture-overview)
+- [Installation](#installation)
+- [Usage Examples](#usage-examples)
+- [Performance Benchmarks](#performance-benchmarks)
+- [Middleware System](#middleware-system)
+- [Production Considerations](#production-considerations)
+- [API Reference](#api-reference)
+- [Examples](#examples)
+- [Testing](#testing)
+- [Contributing](#contributing)
 
-## 🚀 Quick Start
+## Quick Start
 
 ```go
 package main
@@ -56,7 +56,7 @@ import (
     "log"
     "time"
     
-    "cqrs/application"
+    "github.com/arash-mosavi/go-cqrs/application"
 )
 
 // Define a command
@@ -122,7 +122,7 @@ func main() {
 }
 ```
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -160,7 +160,7 @@ func main() {
 - **Metrics**: Real-time performance monitoring and statistics
 - **Handlers**: Business logic implementation for commands and queries
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -178,7 +178,7 @@ go test ./...
 go run cmd/production-demo/main.go
 ```
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Command Bus with Middleware
 
@@ -263,7 +263,7 @@ if err != nil {
 log.Printf("Command executed successfully: %+v", result)
 ```
 
-## 📊 Performance Benchmarks
+## Performance Benchmarks
 
 ### Benchmark Results
 
@@ -292,7 +292,7 @@ BenchmarkConcurrentExecution-8            	 2000000	    756.2 ns/op	    144 B/op
 - **Zero-Copy Paths**: Minimizes allocations in hot paths
 - **Cache Efficiency**: LRU cache with configurable TTL
 
-## 🔧 Middleware System
+## Middleware System
 
 ### Built-in Middleware
 
@@ -362,7 +362,7 @@ commandBus := application.NewCommandBus(application.CommandBusOptions{
 })
 ```
 
-## 🏭 Production Considerations
+## Production Considerations
 
 ### Configuration Management
 
@@ -437,7 +437,7 @@ func TracingMiddleware() application.CommandMiddleware {
 }
 ```
 
-## 📖 API Reference
+## API Reference
 
 ### Command Bus
 
@@ -496,51 +496,199 @@ func (qb *QueryBus) Execute(ctx context.Context, query Query) (interface{}, erro
 func ExecuteTyped[T any](ctx context.Context, bus *QueryBus, query Query) (T, error)
 ```
 
-## 🎯 Examples
+## Examples
 
 The project includes comprehensive examples for different use cases:
 
-### 1. Basic Example
-**Location**: `cmd/example/main.go`
+### 1. Basic Demo
+**Location**: `cmd/demo/main.go`
 ```bash
-go run cmd/example/main.go
+go run cmd/demo/main.go
 ```
 **Demonstrates**:
 - Basic command and query execution
-- Simple middleware configuration
-- Error handling patterns
+- SOLID principles implementation
+- Clean architecture patterns
+- Error handling best practices
 
-### 2. Improved Example  
-**Location**: `cmd/improved-example/main.go`
+### 2. Simplified Demo  
+**Location**: `cmd/simplified-demo/main.go`
 ```bash
-go run cmd/improved-example/main.go
+go run cmd/simplified-demo/main.go
 ```
 **Demonstrates**:
-- Advanced middleware features
-- Validation and caching
+- Streamlined CQRS implementation
+- Essential middleware usage
+- Performance optimization examples
+
+### 3. Complete Production Demo
+**Location**: `cmd/complete-production-demo/main.go`
+```bash
+go run cmd/complete-production-demo/main.go
+```
+**Demonstrates**:
+- Circuit breaker pattern
+- Rate limiting
+- Advanced middleware pipeline
+- Production-grade error handling
+- Performance monitoring
+- Concurrent access protection
+- Graceful shutdown
+
+## How to Run Examples
+
+This CQRS implementation includes three comprehensive examples demonstrating different use cases:
+
+### Prerequisites
+
+- Go 1.24+ installed
+- Git (for cloning the repository)
+
+### Clone and Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/arash-mosavi/go-cqrs.git
+cd go-cqrs
+
+# Initialize the module (if needed)
+go mod init cqrs
+go mod tidy
+```
+
+### Available Examples
+
+#### 1. Basic Demo - SOLID Principles Showcase
+Perfect for understanding the core CQRS concepts and SOLID principles implementation.
+
+```bash
+# Run the basic demo
+go run cmd/demo/main.go
+```
+
+**What it demonstrates:**
+- Basic command and query operations
+- SOLID principles in action
+- Clean error handling
+- Simple user management workflow
+
+#### 2. Simplified Demo - Middleware Integration
+Shows middleware integration with an e-commerce scenario.
+
+```bash
+# Run the simplified demo
+go run cmd/simplified-demo/main.go
+```
+
+**What it demonstrates:**
+- Command/Query separation
+- Middleware pipeline (Logging, Validation, Caching)
+- E-commerce workflow (Users, Products, Orders)
 - Performance metrics
+- Error handling and validation
 
-### 3. Simple Production Demo
-**Location**: `cmd/simple-production-demo/main.go`
+#### 3. Complete Production Demo - Enterprise Features
+Full production-ready example with advanced features.
+
 ```bash
-go run cmd/simple-production-demo/main.go
+# Run the complete production demo
+go run cmd/complete-production-demo/main.go
 ```
-**Demonstrates**:
-- Production-ready configuration
-- Comprehensive error handling
-- Metrics collection and reporting
 
-### 4. Advanced Production Demo
-**Location**: `cmd/production-demo/main.go`
+**What it demonstrates:**
+- Circuit breaker pattern
+- Rate limiting
+- Advanced middleware pipeline
+- Production-grade error handling
+- Performance monitoring
+- Concurrent access protection
+- Graceful shutdown
+
+### Run All Examples
+
 ```bash
-go run cmd/production-demo/main.go
-```
-**Demonstrates**:
-- Full production middleware stack
-- Circuit breaker and rate limiting
-- Advanced monitoring and observability
+# Run all examples sequentially
+make demo
 
-## 🧪 Testing
+# Or manually:
+echo "=== Basic Demo ==="
+go run cmd/demo/main.go
+echo -e "\n=== Simplified Demo ==="
+go run cmd/simplified-demo/main.go
+echo -e "\n=== Production Demo ==="
+go run cmd/complete-production-demo/main.go
+```
+
+### Using as a Module
+
+To use this CQRS implementation in your own projects:
+
+```bash
+# Add to your go.mod
+go get github.com/arash-mosavi/go-cqrs
+```
+
+Then in your Go code:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    
+    "github.com/arash-mosavi/go-cqrs/application"
+)
+
+func main() {
+    // Create command bus
+    commandBus := application.NewCommandBus(application.CommandBusOptions{
+        InitialCapacity: 64,
+        EnableMetrics:   true,
+    })
+    
+    // Your implementation here...
+}
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+go test ./application/... -v
+
+# Run with coverage
+go test ./application/... -cover
+
+# Run benchmarks
+go test ./application/... -bench=. -benchmem
+```
+
+### Expected Output
+
+When you run the examples, you should see output similar to:
+
+```
+CQRS Simple Demo - SOLID Principles Showcase
+==============================================
+Creating users...
+User created: Alice Johnson (ID: user_1)
+User created: Bob Smith (ID: user_2)
+User created: Carol Davis (ID: user_3)
+Querying users...
+User found: Alice Johnson (alice@example.com)
+Retrieved: Alice Johnson <alice@example.com>
+Demo completed successfully!
+SOLID Principles Demonstrated:
+• Single Responsibility: Each handler has one reason to change
+• Open/Closed: System is open for extension, closed for modification
+• Liskov Substitution: Handlers are interchangeable implementations
+• Interface Segregation: Clean, focused interfaces for commands/queries
+• Dependency Inversion: High-level modules don't depend on low-level details
+```
+
+## Testing
 
 ### Running Tests
 
