@@ -1,0 +1,61 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.prof
+go.work
+go.sum
+
+# Project binaries
+/bin/
+/dist/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment files
+.env
+.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Debug files
+debug
+__debug_bin
+debug.test
+
+# Log files
+*.log
+logs/
+
+# Build artifacts
+/build/
+vendor/
+
+# Test cache
+.testCoverage.txt
+coverage.out
+coverage.html
+
+# Project specific
+/tmp/
+/temp/
+
+# Dependency directories (uncomment if needed)
+# /node_modules/
+# /jspm_packages/
+
+# Local configuration files
+/configs/local.*
+local.yaml
+
