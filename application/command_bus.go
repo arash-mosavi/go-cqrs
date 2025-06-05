@@ -85,7 +85,6 @@ func (cb *CommandBus) RegisterHandler(commandName string, handler CommandHandler
 		return fmt.Errorf("command handler for %s already registered", commandName)
 	}
 
-	// Apply middleware chain in reverse order (first added, outermost wrapper)
 	finalHandler := handler
 	for i := len(cb.middleware) - 1; i >= 0; i-- {
 		finalHandler = cb.middleware[i](finalHandler)
@@ -114,12 +113,10 @@ func (cb *CommandBus) ExecuteCommand(ctx context.Context, command Command) (inte
 
 	start := time.Now()
 
-	// Fast path: check for deadline exceeded before handler lookup
 	if deadline, ok := ctx.Deadline(); ok && time.Now().After(deadline) {
 		return nil, errors.New("command execution timeout before handler lookup")
 	}
 
-	// O(1) handler lookup with read lock
 	cb.mutex.RLock()
 	handler, exists := cb.handlers[command.CommandName()]
 	cb.mutex.RUnlock()
@@ -139,7 +136,6 @@ func (cb *CommandBus) ExecuteCommand(ctx context.Context, command Command) (inte
 }
 
 // GetRegisteredCommands returns a list of all registered command names.
-// Time complexity: O(n) where n is the number of registered commands.
 func (cb *CommandBus) GetRegisteredCommands() []string {
 	cb.mutex.RLock()
 	defer cb.mutex.RUnlock()
@@ -160,7 +156,6 @@ func (cb *CommandBus) GetMetrics() *BusMetrics {
 	cb.metrics.mutex.RLock()
 	defer cb.metrics.mutex.RUnlock()
 
-	// Return a copy to prevent external modification
 	return &BusMetrics{
 		TotalExecutions:      cb.metrics.TotalExecutions,
 		TotalFailures:        cb.metrics.TotalFailures,
@@ -168,7 +163,6 @@ func (cb *CommandBus) GetMetrics() *BusMetrics {
 	}
 }
 
-// recordMetrics updates performance metrics (internal method)
 func (cb *CommandBus) recordMetrics(start time.Time, failed bool) {
 	if cb.metrics == nil {
 		return
@@ -184,11 +178,9 @@ func (cb *CommandBus) recordMetrics(start time.Time, failed bool) {
 		cb.metrics.TotalFailures++
 	}
 
-	// Update rolling average (simple implementation)
 	if cb.metrics.TotalExecutions == 1 {
 		cb.metrics.AverageExecutionTime = duration
 	} else {
-		// Exponential moving average with alpha = 0.1
 		alpha := 0.1
 		cb.metrics.AverageExecutionTime = time.Duration(
 			float64(cb.metrics.AverageExecutionTime)*(1-alpha) +
@@ -249,7 +241,6 @@ func TimeoutMiddleware(timeout time.Duration) CommandMiddleware {
 			ctx, cancel := context.WithTimeout(ctx, timeout)
 			defer cancel()
 
-			// Use a channel to handle the result
 			resultChan := make(chan struct {
 				result interface{}
 				err    error
